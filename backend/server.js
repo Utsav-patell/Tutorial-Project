@@ -1,17 +1,21 @@
-const express = require('express'); // Express package is imported
+const express = require("express"); // Express package is imported
 const app = express(); // Created instances of express
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const userRrouter = require("./router/userRouter");
+dotenv.config();
+app.use(express.json());
 
-mongoose.connect("mongodb://127.0.0.1:27017/merndb").then(()=>{
+mongoose
+  .connect(process.env.URI)
+  .then(() => {
     console.log("Connected Sucessfully");
     // Kept App.listen here so that app will not run if there is error in connecting
-    app.listen(4000); // This is port number 
-}).catch((error)=>console.log("Error Caught",error));
+    app.listen(process.env.PORT || 8000, (err) => {
+      if (err) console.log(err);
+      console.log("Running Successfully");
+    }); // This is port number
+  })
+  .catch((error) => console.log("Error Caught", error));
 
-
-// Created a simple API;
-        // route and method
-app.get('/',(req,res)=>{
-    res.send('API Running'); // This will be displayed on the website
-});
-
+app.use(userRrouter);

@@ -3,8 +3,11 @@ const app = express(); // Created instances of express
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const userRrouter = require("./router/userRouter");
+const cors = require("cors");
 dotenv.config();
 app.use(express.json());
+app.use(cors());
+
 
 mongoose
   .connect(process.env.URI)

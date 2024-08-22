@@ -40,7 +40,7 @@ router.get('/:id',async(req,res)=>{
     const { id } = req.params; // Use req.params to fetch details from URL and 
     //  req.body to fetch detail from input Feild
     try {
-    const singleUser = await User.findById({_id:id});
+    const singleUser = await User.findById(id);
     res.status(200).json({singleUser});    
         
     } catch (error) {
@@ -56,7 +56,7 @@ router.delete('/:id',async(req,res)=>{
     const { id } = req.params; // Use req.params to fetch details from URL and 
     //  req.body to fetch detail from input Feild
     try {
-    const DeleteUser = await User.findByIdAndDelete({_id:id});
+    const DeleteUser = await User.findByIdAndDelete(id);
     res.status(200).json({DeleteUser});    
         
     } catch (error) {
